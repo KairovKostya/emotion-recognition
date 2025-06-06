@@ -1,0 +1,25 @@
+# Core ML and Transformers
+torch>=2.0.0
+transformers>=4.37.0
+datasets
+
+# Training framework
+pytorch_lightning>=2.2.0
+
+# Configuration
+hydra-core>=1.3.2
+omegaconf>=2.3.0
+
+# Logging (в дальнейшем для MLflow)
+mlflow
+
+# Utility
+pandas
+scikit-learn
+pyarrow
+
+# For CLI
+click
+
+# Optional but recommended
+tqdm

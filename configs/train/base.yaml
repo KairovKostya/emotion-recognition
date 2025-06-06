@@ -1,0 +1,5 @@
+lr: 2e-5
+epochs: 1
+seed: 42
+mlflow_uri: http://127.0.0.1:8080
+mlflow_experiment: emotion_recognition
