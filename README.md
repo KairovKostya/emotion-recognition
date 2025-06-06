@@ -2,8 +2,8 @@
 
 ## Project Description
 
-This project addresses the task of emotion classification from English-language text using a fine-tuned DistilBERT model.  
-The classification is performed across six emotion categories: sadness, joy, love, anger, fear, and surprise.  
+This project addresses the task of emotion classification from English-language text using a fine-tuned DistilBERT model.
+The classification is performed across six emotion categories: sadness, joy, love, anger, fear, and surprise.
 The model is intended for use in applications such as conversational agents, sentiment analysis, and social media monitoring.
 
 ---
@@ -71,7 +71,7 @@ To run a local REST API server:
 uvicorn emotion_recognition.api:app --reload --port 8000 --host 127.0.0.1 --app-dir src
 ```
 
-After the server starts, open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)  
+After the server starts, open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 To test the endpoint:
 
 ```json

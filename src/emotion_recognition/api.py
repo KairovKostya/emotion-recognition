@@ -1,7 +1,8 @@
+import torch
 from fastapi import FastAPI
 from pydantic import BaseModel
-import torch
 from transformers import AutoTokenizer
+
 from emotion_recognition.models.model import EmotionClassifier
 
 # Инициализация FastAPI
@@ -18,9 +19,11 @@ model = EmotionClassifier(model_name=MODEL_NAME, num_labels=NUM_LABELS, lr=1e-5)
 model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu"))
 model.eval()
 
+
 # Схема входных данных
 class TextInput(BaseModel):
     text: str
+
 
 # Эндпоинт предсказания
 @app.post("/predict")
@@ -30,7 +33,7 @@ def predict(input_data: TextInput):
         return_tensors="pt",
         padding="max_length",
         truncation=True,
-        max_length=MAX_LENGTH
+        max_length=MAX_LENGTH,
     )
     with torch.no_grad():
         logits = model(encoded["input_ids"], encoded["attention_mask"])

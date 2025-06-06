@@ -1,5 +1,7 @@
-import torch
 from pathlib import Path
+
+import torch
+
 
 def save_model(model, path="checkpoints/emotion_model.pt"):
     path = Path(path)

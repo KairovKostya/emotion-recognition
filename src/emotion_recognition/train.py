@@ -1,15 +1,17 @@
+import json
+from pathlib import Path
+
+import git
 import hydra
-from omegaconf import DictConfig
+import matplotlib.pyplot as plt
 import pytorch_lightning as pl
 import torch
-from pathlib import Path
-import matplotlib.pyplot as plt
-import json
-import git
+from omegaconf import DictConfig
 
-from emotion_recognition.models.model import EmotionClassifier
 from emotion_recognition.data.datamodule import EmotionDataModule
+from emotion_recognition.models.model import EmotionClassifier
 from emotion_recognition.utils.save_model import save_model
+
 
 @hydra.main(config_path="../../configs", config_name="config", version_base="1.3")
 def train(cfg: DictConfig):
@@ -19,19 +21,19 @@ def train(cfg: DictConfig):
         train_path=cfg.data.train_path,
         val_path=cfg.data.val_path,
         model_name=cfg.model.model_name,
-        batch_size=cfg.data.batch_size
+        batch_size=cfg.data.batch_size,
     )
 
     model = EmotionClassifier(
         model_name=cfg.model.model_name,
         num_labels=cfg.model.num_labels,
-        lr=cfg.train.lr
+        lr=cfg.train.lr,
     )
 
     trainer = pl.Trainer(
         max_epochs=cfg.train.epochs,
         accelerator="cpu" if not torch.cuda.is_available() else "gpu",
-        devices=1
+        devices=1,
     )
 
     trainer.fit(model, datamodule=datamodule)
@@ -65,6 +67,7 @@ def train(cfg: DictConfig):
 
     with open(plots_dir / "run_metadata.json", "w") as f:
         json.dump(run_info, f, indent=4)
+
 
 if __name__ == "__main__":
     train()

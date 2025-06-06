@@ -1,7 +1,9 @@
 # scripts/download_data.py
-from datasets import load_dataset
-import pandas as pd
 from pathlib import Path
+
+import pandas as pd
+from datasets import load_dataset
+
 
 def download_and_save():
     dataset = load_dataset("dair-ai/emotion")
@@ -11,6 +13,7 @@ def download_and_save():
     for split in ["train", "validation", "test"]:
         df = pd.DataFrame(dataset[split])
         df.to_parquet(save_dir / f"{split}.parquet")
+
 
 if __name__ == "__main__":
     download_and_save()

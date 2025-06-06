@@ -1,7 +1,8 @@
+import pytorch_lightning as pl
 import torch
 import torch.nn as nn
-import pytorch_lightning as pl
 from transformers import AutoModel
+
 
 class EmotionClassifier(pl.LightningModule):
     def __init__(self, model_name: str, num_labels: int, lr: float):
@@ -27,7 +28,11 @@ class EmotionClassifier(pl.LightningModule):
         return loss
 
     def validation_step(self, batch, batch_idx):
-        input_ids, attention_mask, labels = batch["input_ids"], batch["attention_mask"], batch["labels"]
+        input_ids, attention_mask, labels = (
+            batch["input_ids"],
+            batch["attention_mask"],
+            batch["labels"],
+        )
         logits = self(input_ids, attention_mask)
         loss = self.loss_fn(logits, labels)
         preds = torch.argmax(logits, dim=1)
@@ -43,7 +48,7 @@ class EmotionClassifier(pl.LightningModule):
 
         self.val_losses.append(loss.detach())
         self.val_accs.append(acc.detach())
-    
+
     def on_validation_epoch_end(self):
         # Получаем сохранённые значения из валидации
         avg_loss = torch.tensor(self.val_losses).mean()
@@ -60,8 +65,6 @@ class EmotionClassifier(pl.LightningModule):
         # очищаем для следующей эпохи
         self.val_losses.clear()
         self.val_accs.clear()
-
-
 
     def configure_optimizers(self):
         return torch.optim.AdamW(self.parameters(), lr=self.hparams.lr)

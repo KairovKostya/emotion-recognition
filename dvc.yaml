@@ -1,0 +1,26 @@
+stages:
+  download:
+    cmd: PYTHONPATH=src python scripts/download_data.py
+    deps:
+      - scripts/download_data.py
+    outs:
+      - data/raw/train.parquet
+      - data/raw/validation.parquet
+      - data/raw/test.parquet
+
+  train:
+    cmd: PYTHONPATH=src python src/emotion_recognition/train.py
+    deps:
+      - src/emotion_recognition/train.py
+      - data/raw/train.parquet
+      - data/raw/validation.parquet
+    outs:
+      - checkpoints/emotion_model.pt
+
+  export:
+    cmd: PYTHONPATH=src python scripts/export_to_onnx.py
+    deps:
+      - scripts/export_to_onnx.py
+      - checkpoints/emotion_model.pt
+    outs:
+      - exports/emotion_model.onnx
