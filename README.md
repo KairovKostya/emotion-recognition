@@ -13,7 +13,7 @@ The model is intended for use in applications such as conversational agents, sen
 Clone the repository and set up the virtual environment:
 
 ```bash
-git clone <your-repo-url>
+git clone git@github.com:KairovKostya/emotion-recognition.git
 cd emotion-recognition
 python3 -m venv .venv
 source .venv/bin/activate
@@ -31,7 +31,7 @@ pip install onnx fastapi uvicorn
 
 ## Model Training
 
-Step 1: Run full pipeline via DVC
+Run full pipeline via DVC
 ```bash
 dvc repro
 ```
@@ -132,12 +132,12 @@ PYTHONPATH=src pytest tests/
 
 ## Аdditionally
 
-By default, the training is configured to run for 10 epochs, which takes approximately 5–10 minutes on CPU or M1/M2-based machines. This is intended to allow for fast experimentation and demonstration.
+By default, the training is configured to run for 5 epochs, which takes approximately 5 minutes on CPU or M1/M2-based machines. This is intended to allow for fast experimentation and demonstration.
 
 In the file src/emotion_recognition/data/datamodule.py, a subset of the dataset is used to speed up training:
 ``` python
-train_df = pd.read_parquet(self.train_path).sample(n=1000, random_state=42)
-val_df = pd.read_parquet(self.val_path).sample(n=200, random_state=42)
+train_df = pd.read_parquet(self.train_path).sample(n=500, random_state=42)
+val_df = pd.read_parquet(self.val_path).sample(n=100, random_state=42)
 ```
 If needed, you can comment out these .sample(...) lines and use the full dataset for better performance and more realistic results.
 

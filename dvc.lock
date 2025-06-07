@@ -38,21 +38,21 @@ stages:
     outs:
     - path: checkpoints/emotion_model.pt
       hash: md5
-      md5: e9b94fb858e11842a29b4126c8aa58a8
+      md5: 2d114a23508d10da666faf3627170a90
       size: 265509243
   export:
     cmd: PYTHONPATH=src python scripts/export_to_onnx.py
     deps:
     - path: checkpoints/emotion_model.pt
       hash: md5
-      md5: e9b94fb858e11842a29b4126c8aa58a8
+      md5: 2d114a23508d10da666faf3627170a90
       size: 265509243
     - path: scripts/export_to_onnx.py
       hash: md5
-      md5: afe777baa7f5e89a1d86f8d3b10b0df2
-      size: 1328
+      md5: fb5ec389be583b15df724929fb2d3698
+      size: 1380
     outs:
     - path: exports/emotion_model.onnx
       hash: md5
-      md5: 4c3e5a6b2a06081c47c8c02fe2144189
+      md5: 94ffd66b9516ae3160ee603423a6c5db
       size: 265595422

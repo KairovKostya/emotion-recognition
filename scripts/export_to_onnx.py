@@ -1,3 +1,5 @@
+import os
+
 import torch
 from transformers import AutoTokenizer
 
@@ -10,6 +12,7 @@ def export_to_onnx(
     num_labels=6,
     export_path="exports/emotion_model.onnx",
 ):
+    os.makedirs("exports", exist_ok=True)
     # Загрузка модели
     model = EmotionClassifier(model_name=model_name, num_labels=num_labels, lr=1e-5)
     model.load_state_dict(torch.load(model_path, map_location="cpu"))

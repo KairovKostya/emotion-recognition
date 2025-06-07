@@ -42,8 +42,8 @@ class EmotionDataModule(pl.LightningDataModule):
     def setup(self, stage=None):
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         # Подвыборка для быстрого train
-        train_df = pd.read_parquet(self.train_path).sample(n=1000, random_state=42)
-        val_df = pd.read_parquet(self.val_path).sample(n=200, random_state=42)
+        train_df = pd.read_parquet(self.train_path).sample(n=500, random_state=42)
+        val_df = pd.read_parquet(self.val_path).sample(n=100, random_state=42)
         self.train_dataset = EmotionDataset(train_df, self.tokenizer)
         self.val_dataset = EmotionDataset(val_df, self.tokenizer)
 
