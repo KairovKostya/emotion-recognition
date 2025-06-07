@@ -31,6 +31,11 @@ pip install onnx fastapi uvicorn
 
 ## Model Training
 
+Step 1: Run full pipeline via DVC
+```bash
+dvc repro
+```
+
 To launch training, use the command below:
 
 ```bash
@@ -107,6 +112,13 @@ Files required for deployment:
 
 ---
 
+## Running Tests
+To run unit tests:
+
+```bash
+PYTHONPATH=src pytest tests/
+```
+
 ## Directory Structure
 
 - `src/emotion_recognition/`: source code
@@ -117,6 +129,17 @@ Files required for deployment:
 - `exports/`: exported ONNX model
 
 ---
+
+## Аdditionally
+
+By default, the training is configured to run for 10 epochs, which takes approximately 5–10 minutes on CPU or M1/M2-based machines. This is intended to allow for fast experimentation and demonstration.
+
+In the file src/emotion_recognition/data/datamodule.py, a subset of the dataset is used to speed up training:
+``` python
+train_df = pd.read_parquet(self.train_path).sample(n=1000, random_state=42)
+val_df = pd.read_parquet(self.val_path).sample(n=200, random_state=42)
+```
+If needed, you can comment out these .sample(...) lines and use the full dataset for better performance and more realistic results.
 
 ## Author
 

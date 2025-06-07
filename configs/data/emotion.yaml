@@ -1,0 +1,4 @@
+train_path: data/raw/train.parquet
+val_path: data/raw/validation.parquet
+test_path: data/raw/test.parquet
+batch_size: 16
