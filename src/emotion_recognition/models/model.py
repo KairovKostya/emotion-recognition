@@ -1,8 +1,8 @@
 import pytorch_lightning as pl
 import torch
 import torch.nn as nn
-from transformers import AutoModel
 from sklearn.metrics import f1_score
+from transformers import AutoModel
 
 
 class EmotionClassifier(pl.LightningModule):
