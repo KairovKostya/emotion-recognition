@@ -10,27 +10,27 @@ stages:
     outs:
     - path: data/raw/test.parquet
       hash: md5
-      md5: 22d3b3db489c910534e71dfa88c17c67
-      size: 128177
+      md5: 657838a8e4b4c3220cab53d5a9f6dba3
+      size: 128231
     - path: data/raw/train.parquet
       hash: md5
-      md5: fda028919dd3e95cfa5e801cafcb8920
-      size: 1005561
+      md5: 695ebd135178679e04e4acb7a7f70f2f
+      size: 1005618
     - path: data/raw/validation.parquet
       hash: md5
-      md5: d4dc994aa18229267ac8658fb65f117d
-      size: 125941
+      md5: 91ee40c5efc3da4fee9476957448a020
+      size: 125995
   train:
     cmd: PYTHONPATH=src python src/emotion_recognition/train.py
     deps:
     - path: data/raw/train.parquet
       hash: md5
-      md5: fda028919dd3e95cfa5e801cafcb8920
-      size: 1005561
+      md5: 695ebd135178679e04e4acb7a7f70f2f
+      size: 1005618
     - path: data/raw/validation.parquet
       hash: md5
-      md5: d4dc994aa18229267ac8658fb65f117d
-      size: 125941
+      md5: 91ee40c5efc3da4fee9476957448a020
+      size: 125995
     - path: src/emotion_recognition/train.py
       hash: md5
       md5: 0c47513c9b3c14b4c16bf89d75833490
@@ -38,21 +38,21 @@ stages:
     outs:
     - path: checkpoints/emotion_model.pt
       hash: md5
-      md5: 2d114a23508d10da666faf3627170a90
+      md5: 8235ea43a356f7ad8032c75d11310ce2
       size: 265509243
   export:
     cmd: PYTHONPATH=src python scripts/export_to_onnx.py
     deps:
     - path: checkpoints/emotion_model.pt
       hash: md5
-      md5: 2d114a23508d10da666faf3627170a90
+      md5: 8235ea43a356f7ad8032c75d11310ce2
       size: 265509243
     - path: scripts/export_to_onnx.py
       hash: md5
-      md5: fb5ec389be583b15df724929fb2d3698
-      size: 1380
+      md5: 2f4097830e91665d972aab1a9045d965
+      size: 1381
     outs:
     - path: exports/emotion_model.onnx
       hash: md5
-      md5: 94ffd66b9516ae3160ee603423a6c5db
+      md5: 64d75f314d567ffc3f493c7b0a6e3563
       size: 265595422

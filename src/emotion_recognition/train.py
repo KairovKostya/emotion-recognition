@@ -46,6 +46,7 @@ def train(cfg: DictConfig):
     # Plot validation metrics
     plt.plot(model.history["loss"], label="val_loss")
     plt.plot(model.history["acc"], label="val_acc")
+    plt.plot(model.history["f1"], label="val_f1")
     plt.title("Validation metrics")
     plt.xlabel("Epoch")
     plt.ylabel("Value")
